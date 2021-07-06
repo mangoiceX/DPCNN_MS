@@ -8,8 +8,8 @@ from tqdm import tqdm
 from modules.dpcnn import DPCNN
 import numpy as np
 import mindspore.nn as nn
-from data_process.dataloader import ModelDataProcessor
-from gensim.models import FastText
+from data_process.data_loader import ModelDataProcessor
+# from gensim.models import FastText
 from mindspore import Parameter, Tensor
 import mindspore
 
@@ -18,12 +18,8 @@ context.set_context(mode=context.GRAPH_MODE, device_target="CPU")
 
 class Trainer:
     def __init__(self, 
-                train_data,
-                test_data,
                 embedding_pre=None
     ):
-        self.train_data = train_data
-        self.test_data = test_data
         self.model = DPCNN(embedding_pre)
 
         self.data_processor = ModelDataProcessor()
@@ -33,16 +29,55 @@ class Trainer:
         self.criterion = nn.SoftmaxCrossEntropyWithLogits(sparse=True,reduction='mean')
         self.optimizer = nn.Adam(self.model.trainable_params(), learning_rate=config.lr)
 
-    
+    def controller(self):
+
+        for epoch in range(config.epochs):
+            print("Epoch: {}".format(epoch))
+            self.train()
+            self.test()
+
     def train(self):
         net_with_criterion = nn.WithLossCell(self.model, self.criterion)
         train_network = nn.TrainOneStepCell(net_with_criterion, self.optimizer)
         train_network.set_train()
 
-        for epoch in range(config.epochs):
-            for x_batch, y_batch in self.data_processor.get_batch(self.X_train, self.y_train):
-                x_batch = Tensor(x_batch, mindspore.int32)
-                y_batch = Tensor(y_batch, mindspore.int32)
-                loss = train_network(x_batch, y_batch)
+        loss_total = 0.0
+        correct_total = 0
+        for x_batch, y_batch in self.data_processor.get_batch(self.X_train, self.y_train):
+            x_batch = Tensor(x_batch, mindspore.int32)
+            y_batch = Tensor(y_batch, mindspore.int32)
+            # print(x_batch)
+            loss = train_network(x_batch, y_batch)
+            loss_total += float(loss.asnumpy())
+            predict = self.model(x_batch).asnumpy().argmax(1)
+            correct = 0
+            for i, j in zip(predict, y_batch):
+                correct += (i==j.asnumpy())
+            correct_total += correct
+
+        loss_total_final = loss_total
+        accuracy = correct_total / len(self.X_train)
+        print("train loss: {}, train accuracy: {}".format(loss_total_final, accuracy))
+
+    def test(self):
+
+        correct_total = 0
+        for x_batch, y_batch in self.data_processor.get_batch(self.X_test, self.y_test):
+            x_batch = Tensor(x_batch, mindspore.int32)
+            y_batch = Tensor(y_batch, mindspore.int32)
+            predict = self.model(x_batch).asnumpy().argmax(1)
+            correct = 0
+            for i, j in zip(predict, y_batch):
+                correct += (i==j.asnumpy())
+            correct_total += correct
+
+        accuracy = correct_total / len(self.X_test)
+        print("test accuracy: {}".format(accuracy))
+                
+
+if __name__ == "__main__":
+
+    trainer = Trainer()
+    trainer.controller()
 
         
