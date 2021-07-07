@@ -7,12 +7,17 @@ import mindspore.nn as nn
 from utils.config import config
 import mindspore.ops.operations as P
 import mindspore.ops as ops
+from utils.layers import Embedding
 
 
 class DPCNN(nn.Cell):
     def __init__(self, embedding_pre=None):
         super().__init__()
-        self.embedding_layer = nn.Embedding(config.vocab_size, config.embedding_dim)
+        if embedding_pre is not None:
+            print("use pretrained embedding")
+            self.embedding_layer = Embedding.from_pretrained_embedding(embedding_pre, freeze=False)
+        else:
+            self.embedding_layer = nn.Embedding(config.vocab_size, config.embedding_dim)
         
         si = 3
         self.region_embedding = nn.Conv2d(1, config.num_filter, (3, config.embedding_dim), stride=1, pad_mode='valid')

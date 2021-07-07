@@ -76,8 +76,9 @@ class Trainer:
                 
 
 if __name__ == "__main__":
-
-    trainer = Trainer()
+    embedding_pre = np.zeros((10827, 128))
+    embedding_pre = Tensor(embedding_pre, mindspore.float32)
+    trainer = Trainer(embedding_pre)
     trainer.controller()
 
         
