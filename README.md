@@ -6,10 +6,11 @@
 详情见requirements.txt
 
 #### 数据集介绍
-  * rt-polarity.pos contains 5331 positive snippets
-  * rt-polarity.neg contains 5331 negative snippets
 下载链接：
 www.cs.cornell.edu/people/pabo/movie-review-data/rt-polaritydata.tar.gz
+  * rt-polarity.pos contains 5331 positive snippets
+  * rt-polarity.neg contains 5331 negative snippets
+
 
 #### 训练
 python trainer.py -pre=1
