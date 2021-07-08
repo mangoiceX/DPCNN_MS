@@ -24,7 +24,7 @@ class DPCNN(nn.Cell):
         self.region_embedding = nn.Conv2d(1, config.num_filter, (si, config.embedding_dim), stride=1, pad_mode='valid')
         self.conv = nn.Conv2d(config.num_filter, config.num_filter, (si, 1), stride=1, pad_mode='valid')
         self.act_fun = nn.ReLU()
-        self.fc = nn.Dense(config.num_filter, config.num_rel)
+        self.fc = nn.Dense(config.num_filter, config.num_rel, activation=nn.ReLU())
         self.padding0 = nn.Pad(paddings=((0,0),(0,0),(1,1),(0,0)), mode="CONSTANT")  # 针对行，上下添加一行0
         self.padding1 = nn.Pad(paddings=((0,0),(0,0),(0,1),(0,0)), mode="CONSTANT")  # 下添加一行0 
         self.pooling = nn.MaxPool2d(kernel_size=(si, 1), stride=2)
