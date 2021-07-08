@@ -46,7 +46,7 @@ class ModelDataProcessor:
         labels = [1 for i in range(len(setences_list_pos))] + [0 for i in range(len(setences_list_neg))]
         
         # 制作数据集
-        X_train, X_test, y_train, y_test = train_test_split(setences_list, labels, test_size=0.4, shuffle=True, random_state=0, stratify=labels)
+        X_train, X_test, y_train, y_test = train_test_split(setences_list, labels, test_size=0.3, shuffle=True, random_state=0, stratify=labels)
 
         return X_train, X_test, y_train, y_test
 

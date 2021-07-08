@@ -81,7 +81,7 @@ class DPCNN(nn.Cell):
         return x
         
 class AttentionLayer(nn.Cell):
-    def __init__(self, channel, reduction=16, multiply=False):
+    def __init__(self, channel, reduction=16, multiply=False):  # 设置为True的时候，直接停止更新，0.48
         super(AttentionLayer, self).__init__()
         self.avg_pool = nn.AvgPool2d(1)
         self.fc = nn.SequentialCell(
