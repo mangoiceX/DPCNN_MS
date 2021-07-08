@@ -32,6 +32,7 @@ class DPCNN(nn.Cell):
         self.batch_normer2 = nn.BatchNorm2d(num_features=config.num_filter)
         # self.dropout5 = nn.Dropout(0.5)
         self.dropout2 = nn.Dropout(0.2)
+        self.att_layer = AttentionLayer(config.num_filter)
 
     def construct(self, X):
         word_embeddings = self.embedding_layer(X)  # [batch_size, seq_len, embedding_dim]
@@ -39,6 +40,7 @@ class DPCNN(nn.Cell):
         word_embeddings = self.batch_normer(word_embeddings)  # 可以加速到达性能瓶颈
         # word_embeddings = self.dropout2(word_embeddings)
         region_word_embeddings = self.region_embedding(word_embeddings)  # [batch_size, num_filter, seq_len-3+1, 1]
+        x = self.att_layer(region_word_embeddings)
         # region_word_embeddings = self.dropout2(region_word_embeddings)  # 负作用
         x = self.padding0(region_word_embeddings)  # [batch_size, num_filter, seq_len, 1]
         x = self.conv(self.act_fun(region_word_embeddings))  # [batch_size, num_filter, seq_len-3+1, 1]
@@ -78,3 +80,22 @@ class DPCNN(nn.Cell):
     
         return x
         
+class AttentionLayer(nn.Cell):
+    def __init__(self, channel, reduction=16, multiply=False):
+        super(AttentionLayer, self).__init__()
+        self.avg_pool = nn.AvgPool2d(1)
+        self.fc = nn.SequentialCell(
+                nn.Dense(channel, channel // reduction),
+                nn.ReLU(),
+                nn.Dense(channel // reduction, channel),
+                nn.Sigmoid()
+                )
+        self.multiply = multiply
+    def forward(self, x):
+        b, c, _, _ = x.size()
+        y = self.avg_pool(x).view(b, c)
+        y = self.fc(y).view(b, c, 1, 1)
+        if self.multiply == True:
+            return x * y
+        else:
+            return y

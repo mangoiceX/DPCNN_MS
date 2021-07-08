@@ -12,7 +12,7 @@ class Config:
         
         self.embedding_dim = embedding_dim
         
-        self.num_filter = 8
+        self.num_filter = 32
         self.dropout_embedding_rate = 0.5
         self.num_rel = 2
         self.batch_size = 128
