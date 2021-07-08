@@ -52,8 +52,8 @@ class ModelDataProcessor:
 
     def get_data(self):
         # 提供给训练文件获取分割好的数据集
-        file_name_pos = '../data/rt-polaritydata/rt-polarity_processed.pos'
-        file_name_neg = '../data/rt-polaritydata/rt-polarity_processed.neg'
+        file_name_pos = '../data/rt-polaritydata/pos.txt'
+        file_name_neg = '../data/rt-polaritydata/neg.txt'
         X_train, X_test, y_train, y_test = self.process_data(file_name_pos, file_name_neg)
 
         return X_train, X_test, y_train, y_test

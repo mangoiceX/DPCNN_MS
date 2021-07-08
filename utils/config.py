@@ -17,7 +17,7 @@ class Config:
         self.num_rel = 2
         self.batch_size = 128
         # self.vocab_file = '../data/vocab_pretrain.txt'
-        self.vocab_file = '../data/vocab_pretrain.txt'
+        self.vocab_file = '../data/vocab.txt'
 
         cnt = 1  # 添加padd的位置
         with open(self.vocab_file, 'r') as f:
