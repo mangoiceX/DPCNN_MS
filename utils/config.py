@@ -7,7 +7,7 @@ from utils.arg_config import args
 class Config:
 
     def __init__(self,
-            embedding_dim=128,
+            embedding_dim=300,
         ):
         
         self.embedding_dim = embedding_dim
@@ -23,7 +23,7 @@ class Config:
         with open(self.vocab_file, 'r') as f:
             for line in f:
                 cnt += 1
-        cnt = 10828
+        # cnt = 10828
         self.vocab_size = cnt
         self.epochs = 100
         self.lr = 1e-3

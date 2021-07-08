@@ -46,7 +46,7 @@ class ModelDataProcessor:
         labels = [1 for i in range(len(setences_list_pos))] + [0 for i in range(len(setences_list_neg))]
         
         # 制作数据集
-        X_train, X_test, y_train, y_test = train_test_split(setences_list, labels, test_size=0.3, shuffle=True, random_state=0, stratify=labels)
+        X_train, X_test, y_train, y_test = train_test_split(setences_list, labels, test_size=0.4, shuffle=True, random_state=0, stratify=labels)
 
         return X_train, X_test, y_train, y_test
 
@@ -54,6 +54,8 @@ class ModelDataProcessor:
         # 提供给训练文件获取分割好的数据集
         file_name_pos = '../data/rt-polaritydata/pos.txt'
         file_name_neg = '../data/rt-polaritydata/neg.txt'
+        # file_name_pos = '../data/rt-polaritydata/rt-polarity_processed.pos'
+        # file_name_neg = '../data/rt-polaritydata/rt-polarity_processed.neg'
         X_train, X_test, y_train, y_test = self.process_data(file_name_pos, file_name_neg)
 
         return X_train, X_test, y_train, y_test

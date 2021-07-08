@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 somas_meta/
+analyze_fail.dat
 __pycache__/
 *.py[cod]
 *$py.class
