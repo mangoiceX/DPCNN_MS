@@ -1,65 +1,94 @@
-# [No.1] construct_wrapper.4 @ctx.addr=0x19fdca750d0
+# [No.1] construct_wrapper.4 @ctx.addr=0x1e1b7335190
 # 
 funcgraph fg_4(
-        %para1 : Tensor(I32)[128, 35]    # inputs0
+        %para1 : Tensor(I32)[128, 39]    # inputs0
         , %para2 : Tensor(I32)[128]    # inputs1
-        , %para3 : Ref[Tensor(F32)][10828, 128] = @null    # embedding_layer.embedding_table
-        , %para4 : Ref[Tensor(F32)][8, 1, 3, 128] = @null    # region_embedding.weight
-        , %para5 : Ref[Tensor(F32)][2, 8] = @null    # fc.weight
-        , %para6 : Ref[Tensor(F32)][2] = @null    # fc.bias
-        , %para7 : Ref[Tensor(F32)][1] = @null    # beta1_power
-        , %para8 : Ref[Tensor(F32)][1] = @null    # beta2_power
-        , %para9 : Ref[Tensor(F32)][10828, 128] = @null    # moment1.embedding_layer.embedding_table
-        , %para10 : Ref[Tensor(F32)][8, 1, 3, 128] = @null    # moment1.region_embedding.weight
-        , %para11 : Ref[Tensor(F32)][2, 8] = @null    # moment1.fc.weight
-        , %para12 : Ref[Tensor(F32)][2] = @null    # moment1.fc.bias
-        , %para13 : Ref[Tensor(F32)][10828, 128] = @null    # moment2.embedding_layer.embedding_table
-        , %para14 : Ref[Tensor(F32)][8, 1, 3, 128] = @null    # moment2.region_embedding.weight
-        , %para15 : Ref[Tensor(F32)][2, 8] = @null    # moment2.fc.weight
-        , %para16 : Ref[Tensor(F32)][2] = @null    # moment2.fc.bias
-        , %para17 : Ref[Tensor(F32)][] = @null    # learning_rate
+        , %para3 : Ref[Tensor(F32)][16439, 300] = @null    # embedding_layer.embedding_table
+        , %para4 : Ref[Tensor(F32)][32, 1, 3, 300] = @null    # region_embedding.weight
+        , %para5 : Ref[Tensor(F32)][32, 32, 3, 1] = @null    # conv.weight
+        , %para6 : Ref[Tensor(F32)][2, 32] = @null    # fc.weight
+        , %para7 : Ref[Tensor(F32)][2] = @null    # fc.bias
+        , %para8 : Ref[Tensor(F32)][1] = @null    # batch_normer.gamma
+        , %para9 : Ref[Tensor(F32)][1] = @null    # batch_normer.beta
+        , %para10 : Ref[Tensor(F32)][32] = @null    # batch_normer2.gamma
+        , %para11 : Ref[Tensor(F32)][32] = @null    # batch_normer2.beta
+        , %para12 : Ref[Tensor(F32)][2, 32] = @null    # att_layer.fc.0.weight
+        , %para13 : Ref[Tensor(F32)][2] = @null    # att_layer.fc.0.bias
+        , %para14 : Ref[Tensor(F32)][32, 2] = @null    # att_layer.fc.2.weight
+        , %para15 : Ref[Tensor(F32)][32] = @null    # att_layer.fc.2.bias
+        , %para16 : Ref[Tensor(F32)][1] = @null    # beta1_power
+        , %para17 : Ref[Tensor(F32)][1] = @null    # beta2_power
+        , %para18 : Ref[Tensor(F32)][16439, 300] = @null    # moment1.embedding_layer.embedding_table
+        , %para19 : Ref[Tensor(F32)][32, 1, 3, 300] = @null    # moment1.region_embedding.weight
+        , %para20 : Ref[Tensor(F32)][32, 32, 3, 1] = @null    # moment1.conv.weight
+        , %para21 : Ref[Tensor(F32)][2, 32] = @null    # moment1.fc.weight
+        , %para22 : Ref[Tensor(F32)][2] = @null    # moment1.fc.bias
+        , %para23 : Ref[Tensor(F32)][1] = @null    # moment1.batch_normer.gamma
+        , %para24 : Ref[Tensor(F32)][1] = @null    # moment1.batch_normer.beta
+        , %para25 : Ref[Tensor(F32)][32] = @null    # moment1.batch_normer2.gamma
+        , %para26 : Ref[Tensor(F32)][32] = @null    # moment1.batch_normer2.beta
+        , %para27 : Ref[Tensor(F32)][2, 32] = @null    # moment1.att_layer.fc.0.weight
+        , %para28 : Ref[Tensor(F32)][2] = @null    # moment1.att_layer.fc.0.bias
+        , %para29 : Ref[Tensor(F32)][32, 2] = @null    # moment1.att_layer.fc.2.weight
+        , %para30 : Ref[Tensor(F32)][32] = @null    # moment1.att_layer.fc.2.bias
+        , %para31 : Ref[Tensor(F32)][16439, 300] = @null    # moment2.embedding_layer.embedding_table
+        , %para32 : Ref[Tensor(F32)][32, 1, 3, 300] = @null    # moment2.region_embedding.weight
+        , %para33 : Ref[Tensor(F32)][32, 32, 3, 1] = @null    # moment2.conv.weight
+        , %para34 : Ref[Tensor(F32)][2, 32] = @null    # moment2.fc.weight
+        , %para35 : Ref[Tensor(F32)][2] = @null    # moment2.fc.bias
+        , %para36 : Ref[Tensor(F32)][1] = @null    # moment2.batch_normer.gamma
+        , %para37 : Ref[Tensor(F32)][1] = @null    # moment2.batch_normer.beta
+        , %para38 : Ref[Tensor(F32)][32] = @null    # moment2.batch_normer2.gamma
+        , %para39 : Ref[Tensor(F32)][32] = @null    # moment2.batch_normer2.beta
+        , %para40 : Ref[Tensor(F32)][2, 32] = @null    # moment2.att_layer.fc.0.weight
+        , %para41 : Ref[Tensor(F32)][2] = @null    # moment2.att_layer.fc.0.bias
+        , %para42 : Ref[Tensor(F32)][32, 2] = @null    # moment2.att_layer.fc.2.weight
+        , %para43 : Ref[Tensor(F32)][32] = @null    # moment2.att_layer.fc.2.bias
+        , %para44 : Ref[Tensor(F32)][] = @null    # learning_rate
+        , %para45 : Ref[Tensor(F32)][1] = @null    # batch_normer.moving_mean
+        , %para46 : Ref[Tensor(F32)][1] = @null    # batch_normer.moving_variance
     ) {
-    %1 : Tuple[Tensor(I32)*2] = Primitive::MakeTuple(%para1, %para2)    #(Tensor(I32)[128, 35], Tensor(I32)[128]) #scope: Default
+    %1 : Tuple[Tensor(I32)*2] = Primitive::MakeTuple(%para1, %para2)    #(Tensor(I32)[128, 39], Tensor(I32)[128]) #scope: Default
       # 
 
 #------------------------> 0
-    %2 = UnpackCall::unpack_call(FuncGraph::fg_5, %1)    #(Func, Tuple[Tensor(I32)*2])    # fg_5=construct.5(@ctx.addr=0x19fdca76990) #scope: Default @ctx.addr=0x19fdca768d0
+    %2 = UnpackCall::unpack_call(FuncGraph::fg_5, %1)    #(Func, Tuple[Tensor(I32)*2])    # fg_5=construct.5(@ctx.addr=0x1e1b7336450) #scope: Default @ctx.addr=0x1e1b7335790
       # 
     Primitive::Return(%2)    #(Undefined) #scope: Default
       # 
 }
 
 
-# [No.2] UnpackCall.6 @ctx.addr=0x19fdca768d0
+# [No.2] UnpackCall.6 @ctx.addr=0x1e1b7335790
 # 
 funcgraph fg_6(
-        %para18 : Func    # 0
-        , %para19 : Tuple[Tensor(I32)*2]    # 1
+        %para47 : Func    # 0
+        , %para48 : Tuple[Tensor(I32)*2]    # 1
     ) {
-    %1 : Tensor(I32)[128, 35] = Primitive::TupleGetItem(%para19, I64(0))    #(Tuple[Tensor(I32)*2], I64) #scope: Default
+    %1 : Tensor(I32)[128, 39] = Primitive::TupleGetItem(%para48, I64(0))    #(Tuple[Tensor(I32)*2], I64) #scope: Default
       # 
-    %2 : Tensor(I32)[128] = Primitive::TupleGetItem(%para19, I64(1))    #(Tuple[Tensor(I32)*2], I64) #scope: Default
+    %2 : Tensor(I32)[128] = Primitive::TupleGetItem(%para48, I64(1))    #(Tuple[Tensor(I32)*2], I64) #scope: Default
       # 
 
 #------------------------> 1
-    %3 = %para18(%1, %2)    #(Tensor(I32)[128, 35], Tensor(I32)[128]) #scope: Default @ctx.addr=0x19fdca76990
+    %3 = %para47(%1, %2)    #(Tensor(I32)[128, 39], Tensor(I32)[128]) #scope: Default @ctx.addr=0x1e1b7336450
       # 
     Primitive::Return(%3)    #(Undefined) #scope: Default
       # 
 }
 
 
-# [No.3] construct.7 @ctx.addr=0x19fdca76990
+# [No.3] construct.7 @ctx.addr=0x1e1b7336450
 # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\wrap\cell_wrapper.py(351)/    def construct(self, *inputs):/
 funcgraph fg_7[fg_4](
-        %para20 : Tensor(I32)[128, 35]    # inputs0
-        , %para21 : Tensor(I32)[128]    # inputs1
+        %para49 : Tensor(I32)[128, 39]    # inputs0
+        , %para50 : Tensor(I32)[128]    # inputs1
     ) {
-    %1 : Tuple[Tensor(I32)*2] = Primitive::MakeTuple(%para20, %para21)    #(Tensor(I32)[128, 35], Tensor(I32)[128]) #scope: Default
+    %1 : Tuple[Tensor(I32)*2] = Primitive::MakeTuple(%para49, %para50)    #(Tensor(I32)[128, 39], Tensor(I32)[128]) #scope: Default
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\wrap\cell_wrapper.py(351)/    def construct(self, *inputs):/
 
 #------------------------> 2
-    %2 = UnpackCall::unpack_call(FuncGraph::fg_8, %1)    #(Func, Tuple[Tensor(I32)*2])    # fg_8=construct.8(@ctx.addr=0x19fdca76510) #scope: Default @ctx.addr=0x19fdca74b90
+    %2 = UnpackCall::unpack_call(FuncGraph::fg_8, %1)    #(Func, Tuple[Tensor(I32)*2])    # fg_8=construct.8(@ctx.addr=0x1e1b7336210) #scope: Default @ctx.addr=0x1e1b7334dd0
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\wrap\cell_wrapper.py(353)/        loss = self.network(*inputs)/
     %3 = ClassType() #scope: Default
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\wrap\cell_wrapper.py(354)/        sens = P.Fill()(P.DType()(loss), P.Shape()(loss), self.sens)/
@@ -77,7 +106,7 @@ funcgraph fg_7[fg_4](
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\wrap\cell_wrapper.py(355)/        grads = self.grad(self.network, weights)(*inputs, sens)/
     %10 = UnpackGraphPrimitive::UnpackGraph(FuncGraph::fg_8, %1, %9)    #(Undefined, Tuple[Tensor(I32)*2], Undefined)    # fg_8=construct.8 #scope: Default
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\wrap\cell_wrapper.py(355)/        grads = self.grad(self.network, weights)(*inputs, sens)/
-    %11 = Primitive::MakeTuple(%para3, %para4, %para5, %para6)    #(Ref[Tensor(F32)][10828, 128], Ref[Tensor(F32)][8, 1, 3, 128], Ref[Tensor(F32)][2, 8], Ref[Tensor(F32)][2]) #scope: Default
+    %11 = Primitive::MakeTuple(%para3, %para4, %para5, %para6, %para7, %para8, %para9, %para10, %para11, %para12, %para13, %para14, %para15)    #(Ref[Tensor(F32)][16439, 300], Ref[Tensor(F32)][32, 1, 3, 300], Ref[Tensor(F32)][32, 32, 3, 1], Ref[Tensor(F32)][2, 32], Ref[Tensor(F32)][2], Ref[Tensor(F32)][1], Ref[Tensor(F32)][1], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][2, 32], Ref[Tensor(F32)][2], Ref[Tensor(F32)][32, 2], Ref[Tensor(F32)][32]) #scope: Default
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\wrap\cell_wrapper.py(352)/        weights = self.weights/
     %12 = DoSignaturePrimitive::S-Prim-grad(%10, %11)    #(Undefined, Undefined) #scope: Default
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\wrap\cell_wrapper.py(355)/        grads = self.grad(self.network, weights)(*inputs, sens)/
@@ -94,136 +123,205 @@ funcgraph fg_7[fg_4](
 }
 
 
-# [No.4] UnpackCall.10 @ctx.addr=0x19fdca74b90
+# [No.4] UnpackCall.10 @ctx.addr=0x1e1b7334dd0
 # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\wrap\cell_wrapper.py(353)/        loss = self.network(*inputs)/
 funcgraph fg_10(
-        %para22 : Func    # 2
-        , %para23 : Tuple[Tensor(I32)*2]    # 3
+        %para51 : Func    # 2
+        , %para52 : Tuple[Tensor(I32)*2]    # 3
     ) {
-    %1 : Tensor(I32)[128, 35] = Primitive::TupleGetItem(%para23, I64(0))    #(Tuple[Tensor(I32)*2], I64) #scope: Default
+    %1 : Tensor(I32)[128, 39] = Primitive::TupleGetItem(%para52, I64(0))    #(Tuple[Tensor(I32)*2], I64) #scope: Default
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\wrap\cell_wrapper.py(353)/        loss = self.network(*inputs)/
-    %2 : Tensor(I32)[128] = Primitive::TupleGetItem(%para23, I64(1))    #(Tuple[Tensor(I32)*2], I64) #scope: Default
+    %2 : Tensor(I32)[128] = Primitive::TupleGetItem(%para52, I64(1))    #(Tuple[Tensor(I32)*2], I64) #scope: Default
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\wrap\cell_wrapper.py(353)/        loss = self.network(*inputs)/
 
 #------------------------> 3
-    %3 = %para22(%1, %2)    #(Tensor(I32)[128, 35], Tensor(I32)[128]) #scope: Default @ctx.addr=0x19fdca76510
+    %3 = %para51(%1, %2)    #(Tensor(I32)[128, 39], Tensor(I32)[128]) #scope: Default @ctx.addr=0x1e1b7336210
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\wrap\cell_wrapper.py(353)/        loss = self.network(*inputs)/
     Primitive::Return(%3)    #(Undefined) #scope: Default
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\wrap\cell_wrapper.py(353)/        loss = self.network(*inputs)/
 }
 
 
-# [No.5] construct.8 @ctx.addr=0x19fdca76510
+# [No.5] construct.8 @ctx.addr=0x1e1b7336210
 # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\wrap\cell_wrapper.py(107)/    def construct(self, data, label):/
 funcgraph fg_8[fg_4](
-        %para24 : Tensor(I32)[128, 35]    # data
-        , %para25 : Tensor(I32)[128]    # label
+        %para53 : Tensor(I32)[128, 39]    # data
+        , %para54 : Tensor(I32)[128]    # label
     ) {
 
 #------------------------> 4
-    %1 = FuncGraph::fg_11(%para24)    #(Tensor(I32)[128, 35])    # fg_11=construct.11(@ctx.addr=0x19fdca76090) #scope: Default/network-WithLossCell @ctx.addr=0x19fdca76090
+    %1 = FuncGraph::fg_11(%para53)    #(Tensor(I32)[128, 39])    # fg_11=construct.11(@ctx.addr=0x1e1b7336390) #scope: Default/network-WithLossCell @ctx.addr=0x1e1b7336390
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\wrap\cell_wrapper.py(108)/        out = self._backbone(data)/
-    %2 = FuncGraph::fg_12(%1, %para25)    #(Undefined, Tensor(I32)[128])    # fg_12=construct.12 #scope: Default/network-WithLossCell
+    %2 = FuncGraph::fg_12(%1, %para54)    #(Undefined, Tensor(I32)[128])    # fg_12=construct.12 #scope: Default/network-WithLossCell
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\wrap\cell_wrapper.py(109)/        return self._loss_fn(out, label)/
     Primitive::Return(%2)    #(Undefined) #scope: Default/network-WithLossCell
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\wrap\cell_wrapper.py(109)/        return self._loss_fn(out, label)/
 }
 
 
-# [No.6] construct.11 @ctx.addr=0x19fdca76090
-# In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(26)/    def construct(self, X):/
+# [No.6] construct.11 @ctx.addr=0x1e1b7336390
+# In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(37)/    def construct(self, X):/
 funcgraph fg_11[fg_4](
-        %para26 : Tensor(I32)[128, 35]    # X
+        %para55 : Tensor(I32)[128, 39]    # X
     ) {
     %1 : Func = ClassType() #scope: Default/network-WithLossCell/_backbone-DPCNN
-      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(28)/        word_embeddings = P.ExpandDims()(word_embeddings, 0)  # [batch_size, 1, seq_len, embedding_dim]/
-    %2 : Tensor(F32)[128, 35, 128] = FuncGraph::fg_13(%para26)    #(Tensor(I32)[128, 35])    # fg_13=construct.13(@ctx.addr=0x19fdca762d0) #scope: Default/network-WithLossCell/_backbone-DPCNN @ctx.addr=0x19fdca762d0
-      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(27)/        word_embeddings = self.embedding_layer(X)  # [batch_size, seq_len, embedding_dim]/
-    %3 : Tensor(F32)[1, 128, 35, 128] = %1(%2, I64(0))    #(Tensor(F32)[128, 35, 128], I64) #scope: Default/network-WithLossCell/_backbone-DPCNN
-      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(28)/        word_embeddings = P.ExpandDims()(word_embeddings, 0)  # [batch_size, 1, seq_len, embedding_dim]/
+      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(39)/        word_embeddings = P.ExpandDims()(word_embeddings, 1)  # [batch_size, 1, seq_len, embedding_dim]/
+    %2 : Tensor(F32)[128, 39, 300] = FuncGraph::fg_13(%para55)    #(Tensor(I32)[128, 39])    # fg_13=construct.13(@ctx.addr=0x1e1b7334ad0) #scope: Default/network-WithLossCell/_backbone-DPCNN @ctx.addr=0x1e1b7334ad0
+      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(38)/        word_embeddings = self.embedding_layer(X)  # [batch_size, seq_len, embedding_dim]/
+    %3 : Tensor(F32)[128, 1, 39, 300] = %1(%2, I64(1))    #(Tensor(F32)[128, 39, 300], I64) #scope: Default/network-WithLossCell/_backbone-DPCNN
+      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(39)/        word_embeddings = P.ExpandDims()(word_embeddings, 1)  # [batch_size, 1, seq_len, embedding_dim]/
+    %4 : Tensor(F32)[128, 1, 39, 300] = FuncGraph::fg_14(%3)    #(Tensor(F32)[128, 1, 39, 300])    # fg_14=construct.14(@ctx.addr=0x1e1b7334e90) #scope: Default/network-WithLossCell/_backbone-DPCNN @ctx.addr=0x1e1b7334e90
+      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(40)/        word_embeddings = self.batch_normer(word_embeddings)  # 可以加速到达性能瓶颈/
+    %5 : Tensor(F32)[128, 32, 37, 1] = FuncGraph::fg_15(%4)    #(Tensor(F32)[128, 1, 39, 300])    # fg_15=construct.15(@ctx.addr=0x1e1c52cd630) #scope: Default/network-WithLossCell/_backbone-DPCNN @ctx.addr=0x1e1c52cd630
+      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(42)/        region_word_embeddings = self.region_embedding(word_embeddings)  # [batch_size, num_filter, seq_len-3+1, 1]/
+    %6 : Tensor(F32)[128, 32, 39, 1] = FuncGraph::fg_16(%5)    #(Tensor(F32)[128, 32, 37, 1])    # fg_16=construct.16(@ctx.addr=0x1e1c52cd030) #scope: Default/network-WithLossCell/_backbone-DPCNN @ctx.addr=0x1e1c52cd030
+      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(45)/        x = self.padding0(region_word_embeddings)  # [batch_size, num_filter, seq_len, 1]/
+    %7 : Tensor(F32)[128, 32, 39, 1] = FuncGraph::fg_17(%6)    #(Tensor(F32)[128, 32, 39, 1])    # fg_17=construct.17(@ctx.addr=0x1e1c52cd870) #scope: Default/network-WithLossCell/_backbone-DPCNN @ctx.addr=0x1e1c52cd870
+      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(46)/        x = self.conv(self.act_fun(x))  # [batch_size, num_filter, seq_len-3+1, 1]/
+    %8 : Tensor(F32)[128, 32, 37, 1] = FuncGraph::fg_18(%7)    #(Tensor(F32)[128, 32, 39, 1])    # fg_18=construct.18(@ctx.addr=0x1e1c52cd930) #scope: Default/network-WithLossCell/_backbone-DPCNN @ctx.addr=0x1e1c52cd930
+      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(46)/        x = self.conv(self.act_fun(x))  # [batch_size, num_filter, seq_len-3+1, 1]/
+    %9 : Tensor(F32)[128, 32, 39, 1] = FuncGraph::fg_16(%8)    #(Tensor(F32)[128, 32, 37, 1])    # fg_16=construct.16(@ctx.addr=0x1e1c52cd030) #scope: Default/network-WithLossCell/_backbone-DPCNN @ctx.addr=0x1e1c52cd030
+      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(48)/        x = self.padding0(x)  # [batch_size, num_filter, seq_len, 1]/
+    %10 : Tensor(F32)[128, 32, 39, 1] = FuncGraph::fg_17(%9)    #(Tensor(F32)[128, 32, 39, 1])    # fg_17=construct.17(@ctx.addr=0x1e1c52cd870) #scope: Default/network-WithLossCell/_backbone-DPCNN @ctx.addr=0x1e1c52cd870
+      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(50)/        x = self.conv(self.act_fun(x))  # [batch_size, num_filter, seq_len-3+1, 1]/
+    %11 : Tensor(F32)[128, 32, 37, 1] = FuncGraph::fg_18(%10)    #(Tensor(F32)[128, 32, 39, 1])    # fg_18=construct.18(@ctx.addr=0x1e1c52cd930) #scope: Default/network-WithLossCell/_backbone-DPCNN @ctx.addr=0x1e1c52cd930
+      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(50)/        x = self.conv(self.act_fun(x))  # [batch_size, num_filter, seq_len-3+1, 1]/
+    %12 : NoneType = FuncGraph::fg_19(I64(9))    #(I64)    # fg_19=construct.19(@ctx.addr=0x1e1c52ccaf0) #scope: Default/network-WithLossCell/_backbone-DPCNN @ctx.addr=0x1e1c52ccaf0
+      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(51)/        region_word_embeddings = self.att_layer(9)/
 
 #------------------------> 5
-    %4 = FuncGraph::fg_14(%3)    #(Tensor(F32)[1, 128, 35, 128])    # fg_14=construct.14(@ctx.addr=0x19fdca76210) #scope: Default/network-WithLossCell/_backbone-DPCNN @ctx.addr=0x19fdca76210
-      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(29)/        region_word_embeddings = self.region_embedding(word_embeddings)  # [batch_size, num_filter, seq_len-3+1, 1]/
-    %5 = FuncGraph::fg_15(%4)    #(Undefined)    # fg_15=construct.15 #scope: Default/network-WithLossCell/_backbone-DPCNN
-      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(31)/        x = self.padding0(region_word_embeddings)  # [batch_size, num_filter, seq_len, 1]/
-    %6 = FuncGraph::fg_16(%5)    #(Undefined)    # fg_16=construct.16 #scope: Default/network-WithLossCell/_backbone-DPCNN
-      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(32)/        x = self.conv(self.act_fun(x))  # [batch_size, num_filter, seq_len-3+1, 1]/
-    %7 = None(%6)    #(Undefined) #scope: Default/network-WithLossCell/_backbone-DPCNN
-      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(32)/        x = self.conv(self.act_fun(x))  # [batch_size, num_filter, seq_len-3+1, 1]/
-    %8 = FuncGraph::fg_15(%7)    #(Undefined)    # fg_15=construct.15 #scope: Default/network-WithLossCell/_backbone-DPCNN
-      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(33)/        x = self.padding0(x)  # [batch_size, num_filter, seq_len, 1]/
-    %9 = FuncGraph::fg_16(%8)    #(Undefined)    # fg_16=construct.16 #scope: Default/network-WithLossCell/_backbone-DPCNN
-      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(35)/        x = self.conv(self.act_fun(x))  # [batch_size, num_filter, seq_len-3+1, 1]/
-    %10 = None(%9)    #(Undefined) #scope: Default/network-WithLossCell/_backbone-DPCNN
-      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(35)/        x = self.conv(self.act_fun(x))  # [batch_size, num_filter, seq_len-3+1, 1]/
-    %11 = DoSignaturePrimitive::S-Prim-add(%10, %4)    #(Undefined, Undefined) #scope: Default/network-WithLossCell/_backbone-DPCNN
-      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(36)/        x = x + region_word_embeddings  # 残差连接/
-    %12 = FuncGraph::fg_17(%11)    #(Undefined)    # fg_17=⤾construct.17 #scope: Default/network-WithLossCell/_backbone-DPCNN
-      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(38)/        while x.size()[-2] >= 2:  # 直到的seq_len数量减少到1/
-    Primitive::Return(%12)    #(Undefined) #scope: Default/network-WithLossCell/_backbone-DPCNN
-      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(38)/        while x.size()[-2] >= 2:  # 直到的seq_len数量减少到1/
-}
-
-
-# [No.7] construct.14 @ctx.addr=0x19fdca76210
-# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(257)/    def construct(self, x):/
-funcgraph fg_14[fg_4](
-        %para27 : Tensor(F32)[1, 128, 35, 128]    # x
-    ) {
-    %1 : Bool = FuncGraph::fg_18(Bool(0))    #(Bool)    # fg_18=bool_.18(@ctx.addr=0x19fdca74c50) #scope: Default/network-WithLossCell/_backbone-DPCNN/region_embedding-Conv2d @ctx.addr=0x19fdca74c50
-      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
-    %2 : Func = Primitive::Switch(%1, FuncGraph::fg_19, FuncGraph::fg_20)    #(Bool, Func, Func)    # fg_19=✓construct.19, fg_20=✗construct.20(@ctx.addr=0x19fdca75850) #scope: Default/network-WithLossCell/_backbone-DPCNN/region_embedding-Conv2d
-      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
-
-#------------------------> 6
-    %3 = %2() #scope: Default/network-WithLossCell/_backbone-DPCNN/region_embedding-Conv2d @ctx.addr=0x19fdca75850
-      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
-    Primitive::Return(%3)    #(Undefined) #scope: Default/network-WithLossCell/_backbone-DPCNN/region_embedding-Conv2d
-      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
-}
-
-
-# [No.8] ✗construct.20 @ctx.addr=0x19fdca75850
-# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
-funcgraph fg_20[fg_14](
-) {
-    %1 = DoSignaturePrimitive::S-Prim-Conv2D[groups=I64(1), format=I64(0), group=I64(1), output_names=["output"], dilation=(I64(1), I64(1), I64(1), I64(1)), mode=I64(1), input_names=["x", "w"], kernel_size=(I64(3), I64(128)), out_channel=I64(8), pad_mode=I64(1), pad=(I64(0), I64(0), I64(0), I64(0)), stride=(I64(1), I64(1), I64(1), I64(1))](%para27, %para4)    #(Tensor(F32)[1, 128, 35, 128], Ref[Tensor(F32)][8, 1, 3, 128]) #scope: Default/network-WithLossCell/_backbone-DPCNN/region_embedding-Conv2d
-      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(258)/        output = self.conv2d(x, self.weight)/
-
-#------------------------> 7
-    %2 = FuncGraph::fg_21(%1)    #(Undefined)    # fg_21=↓construct.21 #scope: Default/network-WithLossCell/_backbone-DPCNN/region_embedding-Conv2d
-      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
-    Primitive::Return(%2)    #(Undefined) #scope: Default/network-WithLossCell/_backbone-DPCNN/region_embedding-Conv2d
-      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
+    %13 = DoSignaturePrimitive::S-Prim-add(%11, %12)    #(Tensor(F32)[128, 32, 37, 1], NoneType) #scope: Default/network-WithLossCell/_backbone-DPCNN
+      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(52)/        x = x + region_word_embeddings  # 残差连接/
+    %14 = FuncGraph::fg_20(%13)    #(Undefined)    # fg_20=⤾construct.20 #scope: Default/network-WithLossCell/_backbone-DPCNN
+      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(54)/        while x.shape[-2] >= 2:  # 直到的seq_len数量减少到1/
+    Primitive::Return(%14)    #(Undefined) #scope: Default/network-WithLossCell/_backbone-DPCNN
+      # In file d:\Mars\Code\Projects\MS\DPCNN_MS\modules\dpcnn.py(54)/        while x.shape[-2] >= 2:  # 直到的seq_len数量减少到1/
 }
 
 
 #===============================================================================
 
 
-# [No.9] construct.13 @ctx.addr=0x19fdca762d0
+# [No.7] construct.13 @ctx.addr=0x1e1b7334ad0
 # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\embedding.py(128)/    def construct(self, ids):/
 funcgraph fg_13[fg_4](
-        %para28 : Tensor(I32)[128, 35]    # ids
+        %para56 : Tensor(I32)[128, 39]    # ids
     ) {
-    %1 : Bool = FuncGraph::fg_18(Bool(0))    #(Bool)    # fg_18=bool_.18(@ctx.addr=0x19fdca74c50) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding @ctx.addr=0x19fdca74c50
+    %1 : Bool = FuncGraph::fg_21(Bool(0))    #(Bool)    # fg_21=bool_.21(@ctx.addr=0x1e1b7335250) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding @ctx.addr=0x1e1b7335250
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\embedding.py(133)/        if self.use_one_hot:/
-    %2 : Func = Primitive::Switch(%1, FuncGraph::fg_22, FuncGraph::fg_23)    #(Bool, Func, Func)    # fg_22=✓construct.22, fg_23=✗construct.23(@ctx.addr=0x19fdca76390) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
+    %2 : Func = Primitive::Switch(%1, FuncGraph::fg_22, FuncGraph::fg_23)    #(Bool, Func, Func)    # fg_22=✓construct.22, fg_23=✗construct.23(@ctx.addr=0x1e1b7335cd0) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\embedding.py(133)/        if self.use_one_hot:/
-    %3 : Tensor(F32)[128, 35, 128] = %2() #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding @ctx.addr=0x19fdca76390
+    %3 : Tensor(F32)[128, 39, 300] = %2() #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding @ctx.addr=0x1e1b7335cd0
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\embedding.py(133)/        if self.use_one_hot:/
-    Primitive::Return(%3)    #(Tensor(F32)[128, 35, 128]) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
+    Primitive::Return(%3)    #(Tensor(F32)[128, 39, 300]) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\embedding.py(133)/        if self.use_one_hot:/
 }
 
 
-# [No.10] bool_.18 @ctx.addr=0x19fdca74c50
-# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\_extends\parse\standard_method.py(309)/def bool_(x):/
-funcgraph fg_18(
-        %para29 : Bool    # x
+# [No.8] construct.14 @ctx.addr=0x1e1b7334e90
+# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(180)/    def construct(self, x):/
+funcgraph fg_14[fg_4](
+        %para57 : Tensor(F32)[128, 1, 39, 300]    # Φx
     ) {
-    %1 : Func = Primitive::getattr(%para29, "__bool__")    #(Bool, String) #scope: Default/optimizer-Adam
+    %1 : Tuple[I64*4] = DoSignaturePrimitive::S-Prim-Shape(%para57)    #(Tensor(F32)[128, 1, 39, 300]) #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(181)/        _shape_check_bn(self.shape(x), self.input_dims)/
+    %2 : NoneType = DoSignaturePrimitive::S-Prim-_shape_check_bn(%1, "2d")    #(Tuple[I64*4], String) #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(181)/        _shape_check_bn(self.shape(x), self.input_dims)/
+    %3 : NoneType = Primitive::stop_gradient(%2)    #(NoneType) #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(180)/    def construct(self, x):/
+    %4 : Bool = DoSignaturePrimitive::S-Prim-is_(None, None)    #(NoneType, NoneType) #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(182)/        if self.use_batch_statistics is None:/
+    %5 : Bool = FuncGraph::fg_21(%4)    #(Bool)    # fg_21=bool_.21(@ctx.addr=0x1e1b7335850) #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d @ctx.addr=0x1e1b7335850
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(182)/        if self.use_batch_statistics is None:/
+    %6 : Func = Primitive::Switch(%5, FuncGraph::fg_24, FuncGraph::fg_25)    #(Bool, Func, Func)    # fg_24=✓construct.24(@ctx.addr=0x1e1c52cd1b0), fg_25=✗construct.25 #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(182)/        if self.use_batch_statistics is None:/
+    %7 : Tensor(F32)[128, 1, 39, 300] = %6() #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d @ctx.addr=0x1e1c52cd1b0
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(182)/        if self.use_batch_statistics is None:/
+    %8 : Tensor(F32)[128, 1, 39, 300] = Primitive::Depend[side_effect_propagate=I64(1)](%7, %3)    #(Tensor(F32)[128, 1, 39, 300], NoneType) #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(180)/    def construct(self, x):/
+    Primitive::Return(%8)    #(Tensor(F32)[128, 1, 39, 300]) #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(180)/    def construct(self, x):/
+}
+
+
+# [No.9] construct.15 @ctx.addr=0x1e1c52cd630
+# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(257)/    def construct(self, x):/
+funcgraph fg_15[fg_4](
+        %para58 : Tensor(F32)[128, 1, 39, 300]    # x
+    ) {
+    %1 : Bool = FuncGraph::fg_21(Bool(0))    #(Bool)    # fg_21=bool_.21(@ctx.addr=0x1e1b7335250) #scope: Default/network-WithLossCell/_backbone-DPCNN/region_embedding-Conv2d @ctx.addr=0x1e1b7335250
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
+    %2 : Func = Primitive::Switch(%1, FuncGraph::fg_26, FuncGraph::fg_27)    #(Bool, Func, Func)    # fg_26=✓construct.26, fg_27=✗construct.27(@ctx.addr=0x1e1c52cc7f0) #scope: Default/network-WithLossCell/_backbone-DPCNN/region_embedding-Conv2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
+    %3 : Tensor(F32)[128, 32, 37, 1] = %2() #scope: Default/network-WithLossCell/_backbone-DPCNN/region_embedding-Conv2d @ctx.addr=0x1e1c52cc7f0
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
+    Primitive::Return(%3)    #(Tensor(F32)[128, 32, 37, 1]) #scope: Default/network-WithLossCell/_backbone-DPCNN/region_embedding-Conv2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
+}
+
+
+# [No.10] construct.16 @ctx.addr=0x1e1c52cd030
+# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\basic.py(651)/    def construct(self, x):/
+funcgraph fg_16(
+        %para59 : Tensor(F32)[128, 32, 37, 1]    # x
+    ) {
+    %1 : Bool = DoSignaturePrimitive::S-Prim-equal("CONSTANT", "CONSTANT")    #(String, String) #scope: Default/network-WithLossCell/_backbone-DPCNN/padding0-Pad @ctx.addr=0x1e1c52cd3f0
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\basic.py(652)/        if self.mode == "CONSTANT":/
+    %2 : Bool = FuncGraph::fg_21(%1)    #(Bool)    # fg_21=bool_.21(@ctx.addr=0x1e1b7335850) #scope: Default/network-WithLossCell/_backbone-DPCNN/padding0-Pad @ctx.addr=0x1e1b7335850
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\basic.py(652)/        if self.mode == "CONSTANT":/
+    %3 : Func = Primitive::Switch(%2, FuncGraph::fg_28, FuncGraph::fg_29)    #(Bool, Func, Func)    # fg_28=✓construct.28(@ctx.addr=0x1e1c52cc970), fg_29=✗construct.29 #scope: Default/network-WithLossCell/_backbone-DPCNN/padding0-Pad
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\basic.py(652)/        if self.mode == "CONSTANT":/
+    %4 : Tensor(F32)[128, 32, 39, 1] = %3() #scope: Default/network-WithLossCell/_backbone-DPCNN/padding0-Pad @ctx.addr=0x1e1c52cc970
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\basic.py(652)/        if self.mode == "CONSTANT":/
+    Primitive::Return(%4)    #(Tensor(F32)[128, 32, 39, 1]) #scope: Default/network-WithLossCell/_backbone-DPCNN/padding0-Pad
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\basic.py(652)/        if self.mode == "CONSTANT":/
+}
+
+
+# [No.11] construct.17 @ctx.addr=0x1e1c52cd870
+# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\activation.py(236)/    def construct(self, x):/
+funcgraph fg_17(
+        %para60 : Tensor(F32)[128, 32, 39, 1]    # x
+    ) {
+    %1 : Tensor(F32)[128, 32, 39, 1] = DoSignaturePrimitive::S-Prim-ReLU[output_names=["output"], input_names=["x"]](%para60)    #(Tensor(F32)[128, 32, 39, 1]) #scope: Default/network-WithLossCell/_backbone-DPCNN/act_fun-ReLU
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\activation.py(237)/        return self.relu(x)/
+    Primitive::Return(%1)    #(Tensor(F32)[128, 32, 39, 1]) #scope: Default/network-WithLossCell/_backbone-DPCNN/act_fun-ReLU
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\activation.py(237)/        return self.relu(x)/
+}
+
+
+# [No.12] construct.18 @ctx.addr=0x1e1c52cd930
+# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(257)/    def construct(self, x):/
+funcgraph fg_18[fg_4](
+        %para61 : Tensor(F32)[128, 32, 39, 1]    # x
+    ) {
+    %1 : Bool = FuncGraph::fg_21(Bool(0))    #(Bool)    # fg_21=bool_.21(@ctx.addr=0x1e1b7335250) #scope: Default/network-WithLossCell/_backbone-DPCNN/conv-Conv2d @ctx.addr=0x1e1b7335250
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
+    %2 : Func = Primitive::Switch(%1, FuncGraph::fg_30, FuncGraph::fg_31)    #(Bool, Func, Func)    # fg_30=✓construct.30, fg_31=✗construct.31(@ctx.addr=0x1e1c52ccc70) #scope: Default/network-WithLossCell/_backbone-DPCNN/conv-Conv2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
+    %3 : Tensor(F32)[128, 32, 37, 1] = %2() #scope: Default/network-WithLossCell/_backbone-DPCNN/conv-Conv2d @ctx.addr=0x1e1c52ccc70
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
+    Primitive::Return(%3)    #(Tensor(F32)[128, 32, 37, 1]) #scope: Default/network-WithLossCell/_backbone-DPCNN/conv-Conv2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
+}
+
+
+# [No.13] construct.32 @ctx.addr=0x1e1c52ccaf0
+# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\cell.py(701)/    def construct(self, *inputs, **kwargs):/
+funcgraph fg_32(
+        %para62 : I64    # inputs0
+    ) {
+    Primitive::Return(None)    #(NoneType) #scope: Default/network-WithLossCell/_backbone-DPCNN/att_layer-AttentionLayer
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\cell.py(708)/        return None/
+}
+
+
+# [No.14] bool_.21 @ctx.addr=0x1e1b7335250
+# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\_extends\parse\standard_method.py(309)/def bool_(x):/
+funcgraph fg_21(
+        %para63 : Bool    # x
+    ) {
+    %1 : Func = Primitive::getattr(%para63, "__bool__")    #(Bool, String) #scope: Default/optimizer-Adam
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\_extends\parse\standard_method.py(311)/    return x.__bool__()/
     %2 : Bool = %1() #scope: Default/optimizer-Adam
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\_extends\parse\standard_method.py(311)/    return x.__bool__()/
@@ -232,85 +330,225 @@ funcgraph fg_18(
 }
 
 
-# [No.11] ✗construct.23 @ctx.addr=0x19fdca76390
+# [No.15] ✗construct.23 @ctx.addr=0x1e1b7335cd0
 # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\embedding.py(133)/        if self.use_one_hot:/
 funcgraph fg_23[fg_13](
 ) {
-    %1 : I64 = DoSignaturePrimitive::S-Prim-negative(I64(1))    #(I64) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding @ctx.addr=0x19fdca75310
+    %1 : I64 = DoSignaturePrimitive::S-Prim-negative(I64(1))    #(I64) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding @ctx.addr=0x1e1b7335e50
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\embedding.py(129)/        extended_ids = self.expand(ids, -1)/
-    %2 : Tensor(I32)[128, 35, 1] = DoSignaturePrimitive::S-Prim-ExpandDims[output_names=["output"], input_names=["x", "axis"]](%para28, %1)    #(Tensor(I32)[128, 35], I64) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
+    %2 : Tensor(I32)[128, 39, 1] = DoSignaturePrimitive::S-Prim-ExpandDims[output_names=["output"], input_names=["x", "axis"]](%para56, %1)    #(Tensor(I32)[128, 39], I64) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\embedding.py(129)/        extended_ids = self.expand(ids, -1)/
-    %3 : Tensor(I32)[4480] = DoSignaturePrimitive::S-Prim-Reshape[output_names=["output"], input_names=["tensor", "shape"]](%2, (I64(-1)))    #(Tensor(I32)[128, 35, 1], Tuple[I64]) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
+    %3 : Tensor(I32)[4992] = DoSignaturePrimitive::S-Prim-Reshape[output_names=["output"], input_names=["tensor", "shape"]](%2, (I64(-1)))    #(Tensor(I32)[128, 39, 1], Tuple[I64]) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\embedding.py(131)/        flat_ids = self.reshape_flat(extended_ids, self.shp_flat)/
-    %4 : Tensor(F32)[4480, 128] = DoSignaturePrimitive::S-Prim-Gather[output_names=["output"], input_names=["params", "indices", "axis"]](%para3, %3, I64(0))    #(Ref[Tensor(F32)][10828, 128], Tensor(I32)[4480], I64) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
+    %4 : Tensor(F32)[4992, 300] = DoSignaturePrimitive::S-Prim-Gather[output_names=["output"], input_names=["params", "indices", "axis"]](%para3, %3, I64(0))    #(Ref[Tensor(F32)][16439, 300], Tensor(I32)[4992], I64) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\embedding.py(137)/            output_for_reshape = self.gather(self.embedding_table, flat_ids, 0)/
-    %5 : Tensor(F32)[128, 35, 128] = FuncGraph::fg_24(%4)    #(Tensor(F32)[4480, 128])    # fg_24=↓construct.24(@ctx.addr=0x19fdca75cd0) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding @ctx.addr=0x19fdca75cd0
+    %5 : Tensor(F32)[128, 39, 300] = FuncGraph::fg_33(%4)    #(Tensor(F32)[4992, 300])    # fg_33=↓construct.33(@ctx.addr=0x1e1b73368d0) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding @ctx.addr=0x1e1b73368d0
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\embedding.py(133)/        if self.use_one_hot:/
-    Primitive::Return(%5)    #(Tensor(F32)[128, 35, 128]) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
+    Primitive::Return(%5)    #(Tensor(F32)[128, 39, 300]) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\embedding.py(133)/        if self.use_one_hot:/
 }
 
 
-# [No.12] _neg_scalar.25 @ctx.addr=0x19fdca75310
+# [No.16] bool_.21 @ctx.addr=0x1e1b7335850
+# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\_extends\parse\standard_method.py(309)/def bool_(x):/
+funcgraph fg_21(
+        %para64 : Bool    # x
+    ) {
+    %1 : Func = Primitive::getattr(%para63, "__bool__")    #(Bool, String) #scope: Default/optimizer-Adam
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\_extends\parse\standard_method.py(311)/    return x.__bool__()/
+    %2 : Bool = %1() #scope: Default/optimizer-Adam
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\_extends\parse\standard_method.py(311)/    return x.__bool__()/
+    Primitive::Return(%2)    #(Bool) #scope: Default/optimizer-Adam
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\_extends\parse\standard_method.py(311)/    return x.__bool__()/
+}
+
+
+# [No.16] ✓construct.24 @ctx.addr=0x1e1c52cd1b0
+# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(182)/        if self.use_batch_statistics is None:/
+funcgraph fg_24[fg_14](
+) {
+    %1 : Tensor(F32)[128, 1, 39, 300] = FuncGraph::fg_34(Bool(1))    #(Bool)    # fg_34=↓construct.34(@ctx.addr=0x1e1c52cc370) #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d @ctx.addr=0x1e1c52cc370
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(182)/        if self.use_batch_statistics is None:/
+    Primitive::Return(%1)    #(Tensor(F32)[128, 1, 39, 300]) #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(182)/        if self.use_batch_statistics is None:/
+}
+
+
+# [No.17] ✗construct.27 @ctx.addr=0x1e1c52cc7f0
+# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
+funcgraph fg_27[fg_15](
+) {
+    %1 : Tensor(F32)[128, 32, 37, 1] = DoSignaturePrimitive::S-Prim-Conv2D[pad_list=(I64(0), I64(0), I64(0), I64(0)), groups=I64(1), format=I64(0), group=I64(1), output_names=["output"], dilation=(I64(1), I64(1), I64(1), I64(1)), mode=I64(1), input_names=["x", "w"], kernel_size=(I64(3), I64(300)), out_channel=I64(32), pad_mode=I64(2), pad=(I64(0), I64(0), I64(0), I64(0)), stride=(I64(1), I64(1), I64(1), I64(1))](%para58, %para4)    #(Tensor(F32)[128, 1, 39, 300], Ref[Tensor(F32)][32, 1, 3, 300]) #scope: Default/network-WithLossCell/_backbone-DPCNN/region_embedding-Conv2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(258)/        output = self.conv2d(x, self.weight)/
+    %2 : Tensor(F32)[128, 32, 37, 1] = FuncGraph::fg_35(%1)    #(Tensor(F32)[128, 32, 37, 1])    # fg_35=↓construct.35(@ctx.addr=0x1e1c52cd270) #scope: Default/network-WithLossCell/_backbone-DPCNN/region_embedding-Conv2d @ctx.addr=0x1e1c52cd270
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
+    Primitive::Return(%2)    #(Tensor(F32)[128, 32, 37, 1]) #scope: Default/network-WithLossCell/_backbone-DPCNN/region_embedding-Conv2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
+}
+
+
+# [No.18] _equal_string.36 @ctx.addr=0x1e1c52cd3f0
+# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\equal_impl.py(75)/def _equal_string(x, y):/
+funcgraph fg_36(
+        %para65 : String    # x
+        , %para66 : String    # y
+    ) {
+    %1 : ExternalType = Primitive::resolve(NameSpace::SymbolStr@null, F)    #(ExternalType, ExternalType) #scope: Default/network-WithLossCell/_backbone-DPCNN/padding0-Pad
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\equal_impl.py(86)/    return F.string_eq(x, y)/
+    %2 : Func = Primitive::getattr(%1, "string_eq")    #(ExternalType, String) #scope: Default/network-WithLossCell/_backbone-DPCNN/padding0-Pad
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\equal_impl.py(86)/    return F.string_eq(x, y)/
+    %3 : Bool = %2(%para65, %para66)    #(String, String) #scope: Default/network-WithLossCell/_backbone-DPCNN/padding0-Pad
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\equal_impl.py(86)/    return F.string_eq(x, y)/
+    Primitive::Return(%3)    #(Bool) #scope: Default/network-WithLossCell/_backbone-DPCNN/padding0-Pad
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\equal_impl.py(86)/    return F.string_eq(x, y)/
+}
+
+
+# [No.19] ✓construct.28 @ctx.addr=0x1e1c52cc970
+# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\basic.py(652)/        if self.mode == "CONSTANT":/
+funcgraph fg_28[fg_16](
+) {
+    %1 : Tensor(F32)[128, 32, 39, 1] = DoSignaturePrimitive::S-Prim-Pad[output_names=["y"], paddings=((I64(0), I64(0)), (I64(0), I64(0)), (I64(1), I64(1)), (I64(0), I64(0))), input_names=["x"]](%para59)    #(Tensor(F32)[128, 32, 37, 1]) #scope: Default/network-WithLossCell/_backbone-DPCNN/padding0-Pad
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\basic.py(653)/            x = self.pad(x)/
+    %2 : Tensor(F32)[128, 32, 39, 1] = FuncGraph::fg_37(%1)    #(Tensor(F32)[128, 32, 39, 1])    # fg_37=↓construct.37(@ctx.addr=0x1e1c52cd6f0) #scope: Default/network-WithLossCell/_backbone-DPCNN/padding0-Pad @ctx.addr=0x1e1c52cd6f0
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\basic.py(652)/        if self.mode == "CONSTANT":/
+    Primitive::Return(%2)    #(Tensor(F32)[128, 32, 39, 1]) #scope: Default/network-WithLossCell/_backbone-DPCNN/padding0-Pad
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\basic.py(652)/        if self.mode == "CONSTANT":/
+}
+
+
+# [No.20] ✗construct.31 @ctx.addr=0x1e1c52ccc70
+# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
+funcgraph fg_31[fg_18](
+) {
+    %1 : Tensor(F32)[128, 32, 37, 1] = DoSignaturePrimitive::S-Prim-Conv2D[pad_list=(I64(0), I64(0), I64(0), I64(0)), groups=I64(1), format=I64(0), group=I64(1), output_names=["output"], dilation=(I64(1), I64(1), I64(1), I64(1)), mode=I64(1), input_names=["x", "w"], kernel_size=(I64(3), I64(1)), out_channel=I64(32), pad_mode=I64(2), pad=(I64(0), I64(0), I64(0), I64(0)), stride=(I64(1), I64(1), I64(1), I64(1))](%para61, %para5)    #(Tensor(F32)[128, 32, 39, 1], Ref[Tensor(F32)][32, 32, 3, 1]) #scope: Default/network-WithLossCell/_backbone-DPCNN/conv-Conv2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(258)/        output = self.conv2d(x, self.weight)/
+    %2 : Tensor(F32)[128, 32, 37, 1] = FuncGraph::fg_38(%1)    #(Tensor(F32)[128, 32, 37, 1])    # fg_38=↓construct.38(@ctx.addr=0x1e1c52cdf30) #scope: Default/network-WithLossCell/_backbone-DPCNN/conv-Conv2d @ctx.addr=0x1e1c52cdf30
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
+    Primitive::Return(%2)    #(Tensor(F32)[128, 32, 37, 1]) #scope: Default/network-WithLossCell/_backbone-DPCNN/conv-Conv2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
+}
+
+
+# [No.21] _neg_scalar.39 @ctx.addr=0x1e1b7335e50
 # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\negative_impl.py(30)/def _neg_scalar(x):/
-funcgraph fg_25(
-        %para30 : I64    # x
+funcgraph fg_39(
+        %para67 : I64    # x
     ) {
     %1 : ExternalType = Primitive::resolve(NameSpace::SymbolStr@null, F)    #(ExternalType, ExternalType) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\negative_impl.py(37)/    return F.scalar_usub(x)/
     %2 : Func = Primitive::getattr(%1, "scalar_usub")    #(ExternalType, String) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\negative_impl.py(37)/    return F.scalar_usub(x)/
-    %3 : I64 = %2(%para30)    #(I64) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
+    %3 : I64 = %2(%para67)    #(I64) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\negative_impl.py(37)/    return F.scalar_usub(x)/
     Primitive::Return(%3)    #(I64) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\negative_impl.py(37)/    return F.scalar_usub(x)/
 }
 
 
-# [No.13] ↓construct.24 @ctx.addr=0x19fdca75cd0
+# [No.22] ↓construct.33 @ctx.addr=0x1e1b73368d0
 # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\embedding.py(133)/        if self.use_one_hot:/
-funcgraph fg_24[fg_13](
-        %para31 : Tensor(F32)[4480, 128]    # Φoutput_for_reshape
+funcgraph fg_33[fg_13](
+        %para68 : Tensor(F32)[4992, 300]    # Φoutput_for_reshape
     ) {
-    %1 : Tuple[I64*2] = DoSignaturePrimitive::S-Prim-Shape(%para28)    #(Tensor(I32)[128, 35]) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
+    %1 : Tuple[I64*2] = DoSignaturePrimitive::S-Prim-Shape(%para56)    #(Tensor(I32)[128, 39]) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\embedding.py(130)/        out_shape = self.get_shp(ids) + (self.embedding_size,)/
-    %2 : Tuple[I64] = DoSignaturePrimitive::S-Prim-MakeTuple(I64(128))    #(I64) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
+    %2 : Tuple[I64] = DoSignaturePrimitive::S-Prim-MakeTuple(I64(300))    #(I64) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\embedding.py(130)/        out_shape = self.get_shp(ids) + (self.embedding_size,)/
-    %3 : Tuple[I64*3] = DoSignaturePrimitive::S-Prim-add(%1, %2)    #(Tuple[I64*2], Tuple[I64]) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding @ctx.addr=0x19fdca753d0
+    %3 : Tuple[I64*3] = DoSignaturePrimitive::S-Prim-add(%1, %2)    #(Tuple[I64*2], Tuple[I64]) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding @ctx.addr=0x1e1b7335f10
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\embedding.py(139)/        output = self.reshape(output_for_reshape, out_shape)/
-    %4 : Tensor(F32)[128, 35, 128] = DoSignaturePrimitive::S-Prim-Reshape[output_names=["output"], input_names=["tensor", "shape"]](%para31, %3)    #(Tensor(F32)[4480, 128], Tuple[I64*3]) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
+    %4 : Tensor(F32)[128, 39, 300] = DoSignaturePrimitive::S-Prim-Reshape[output_names=["output"], input_names=["tensor", "shape"]](%para68, %3)    #(Tensor(F32)[4992, 300], Tuple[I64*3]) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\embedding.py(139)/        output = self.reshape(output_for_reshape, out_shape)/
-    Primitive::Return(%4)    #(Tensor(F32)[128, 35, 128]) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
+    Primitive::Return(%4)    #(Tensor(F32)[128, 39, 300]) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\embedding.py(140)/        return output/
 }
 
 
-# [No.14] _add_tuple.26 @ctx.addr=0x19fdca753d0
+# [No.23] ↓construct.34 @ctx.addr=0x1e1c52cc370
+# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(182)/        if self.use_batch_statistics is None:/
+funcgraph fg_34[fg_14](
+        %para69 : Bool    # Φflag
+    ) {
+    %1 : Bool = FuncGraph::fg_21(%para69)    #(Bool)    # fg_21=bool_.21(@ctx.addr=0x1e1b7335850) #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d @ctx.addr=0x1e1b7335850
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(187)/        if flag:/
+    %2 : Func = Primitive::Switch(%1, FuncGraph::fg_40, FuncGraph::fg_41)    #(Bool, Func, Func)    # fg_40=✓↓construct.40(@ctx.addr=0x1e1c52cc2b0), fg_41=✗↓construct.41 #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(187)/        if flag:/
+    %3 : Tensor(F32)[128, 1, 39, 300] = %2() #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d @ctx.addr=0x1e1c52cc2b0
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(187)/        if flag:/
+    Primitive::Return(%3)    #(Tensor(F32)[128, 1, 39, 300]) #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(187)/        if flag:/
+}
+
+
+# [No.24] ↓construct.35 @ctx.addr=0x1e1c52cd270
+# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
+funcgraph fg_35(
+        %para70 : Tensor(F32)[128, 32, 37, 1]    # Φoutput
+    ) {
+    Primitive::Return(%para70)    #(Tensor(F32)[128, 32, 37, 1]) #scope: Default/network-WithLossCell/_backbone-DPCNN/region_embedding-Conv2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(261)/        return output/
+}
+
+
+# [No.25] ↓construct.37 @ctx.addr=0x1e1c52cd6f0
+# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\basic.py(652)/        if self.mode == "CONSTANT":/
+funcgraph fg_37(
+        %para71 : Tensor(F32)[128, 32, 39, 1]    # Φx
+    ) {
+    Primitive::Return(%para71)    #(Tensor(F32)[128, 32, 39, 1]) #scope: Default/network-WithLossCell/_backbone-DPCNN/padding0-Pad
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\basic.py(656)/        return x/
+}
+
+
+# [No.26] ↓construct.38 @ctx.addr=0x1e1c52cdf30
+# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(259)/        if self.has_bias:/
+funcgraph fg_38(
+        %para72 : Tensor(F32)[128, 32, 37, 1]    # Φoutput
+    ) {
+    Primitive::Return(%para72)    #(Tensor(F32)[128, 32, 37, 1]) #scope: Default/network-WithLossCell/_backbone-DPCNN/conv-Conv2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\conv.py(261)/        return output/
+}
+
+
+# [No.27] _add_tuple.42 @ctx.addr=0x1e1b7335f10
 # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\add_impl.py(163)/def _add_tuple(x, y):/
-funcgraph fg_26(
-        %para32 : Tuple[I64*2]    # x
-        , %para33 : Tuple[I64]    # y
+funcgraph fg_42(
+        %para73 : Tuple[I64*2]    # x
+        , %para74 : Tuple[I64]    # y
     ) {
     %1 : Func = Primitive::resolve(NameSpace::SymbolStr@null, _tuple_add)    #(ExternalType, ExternalType) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\add_impl.py(174)/    return _tuple_add(x, y)/
-    %2 : Tuple[I64*3] = %1(%para32, %para33)    #(Tuple[I64*2], Tuple[I64]) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding @ctx.addr=0x19fdca75e50
+    %2 : Tuple[I64*3] = %1(%para73, %para74)    #(Tuple[I64*2], Tuple[I64]) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding @ctx.addr=0x1e1b73356d0
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\add_impl.py(174)/    return _tuple_add(x, y)/
     Primitive::Return(%2)    #(Tuple[I64*3]) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\add_impl.py(174)/    return _tuple_add(x, y)/
 }
 
 
-# [No.15] 27.28 @ctx.addr=0x19fdca75e50
+# [No.28] ✓↓construct.40 @ctx.addr=0x1e1c52cc2b0
+# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(187)/        if flag:/
+funcgraph fg_40[fg_14](
+) {
+    %1 : Tuple[Tensor(F32)*5] = DoSignaturePrimitive::S-Prim-BatchNorm[output_names=["y", "batch_mean", "batch_variance", "reserve_space_1", "reserve_space_2"], input_names=["x", "scale", "offset", "mean", "variance"], format=I64(0), momentum=F32(0.1), is_training=Bool(1), epsilon=F32(1e-005)](%para57, %para8, %para9, %para45, %para46)    #(Tensor(F32)[128, 1, 39, 300], Ref[Tensor(F32)][1], Ref[Tensor(F32)][1], Ref[Tensor(F32)][1], Ref[Tensor(F32)][1]) #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(188)/            return self.bn_train(x,/
+    %2 : Tensor(F32)[128, 1, 39, 300] = DoSignaturePrimitive::S-Prim-getitem(%1, I64(0))    #(Tuple[Tensor(F32)*5], I64) #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d @ctx.addr=0x1e1c52cd0f0
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(188)/            return self.bn_train(x,/
+    Primitive::Return(%2)    #(Tensor(F32)[128, 1, 39, 300]) #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\nn\layer\normalization.py(188)/            return self.bn_train(x,/
+}
+
+
+# [No.29] 43.44 @ctx.addr=0x1e1b73356d0
 # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\add_impl.py(174)/    return _tuple_add(x, y)/
-funcgraph fg_28(
-        %para34 : Tuple[I64*2]    # 29
-        , %para35 : Tuple[I64]    # 30
+funcgraph fg_44(
+        %para75 : Tuple[I64*2]    # 45
+        , %para76 : Tuple[I64]    # 46
     ) {
-    %1 : I64 = Primitive::TupleGetItem(%para34, I64(0))    #(Tuple[I64*2], I64) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
+    %1 : I64 = Primitive::TupleGetItem(%para75, I64(0))    #(Tuple[I64*2], I64) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\add_impl.py(174)/    return _tuple_add(x, y)/
-    %2 : I64 = Primitive::TupleGetItem(%para34, I64(1))    #(Tuple[I64*2], I64) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
+    %2 : I64 = Primitive::TupleGetItem(%para75, I64(1))    #(Tuple[I64*2], I64) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\add_impl.py(174)/    return _tuple_add(x, y)/
-    %3 : I64 = Primitive::TupleGetItem(%para35, I64(0))    #(Tuple[I64], I64) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
+    %3 : I64 = Primitive::TupleGetItem(%para76, I64(0))    #(Tuple[I64], I64) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\add_impl.py(174)/    return _tuple_add(x, y)/
     %4 : Tuple[I64*3] = Primitive::MakeTuple(%1, %2, %3)    #(I64, I64, I64) #scope: Default/network-WithLossCell/_backbone-DPCNN/embedding_layer-Embedding
       # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\add_impl.py(174)/    return _tuple_add(x, y)/
@@ -319,4 +557,21 @@ funcgraph fg_28(
 }
 
 
-# num of total function graphs: 15
+# [No.30] _tuple_getitem_by_number.47 @ctx.addr=0x1e1c52cd0f0
+# In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\getitem_impl.py(75)/def _tuple_getitem_by_number(data, number_index):/
+funcgraph fg_47(
+        %para77 : Tuple[Tensor(F32)*5]    # data
+        , %para78 : I64    # number_index
+    ) {
+    %1 : ExternalType = Primitive::resolve(NameSpace::SymbolStr@null, F)    #(ExternalType, ExternalType) #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\getitem_impl.py(86)/    return F.tuple_getitem(data, number_index)/
+    %2 : Func = Primitive::getattr(%1, "tuple_getitem")    #(ExternalType, String) #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\getitem_impl.py(86)/    return F.tuple_getitem(data, number_index)/
+    %3 : Tensor(F32)[128, 1, 39, 300] = %2(%para77, %para78)    #(Tuple[Tensor(F32)*5], I64) #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\getitem_impl.py(86)/    return F.tuple_getitem(data, number_index)/
+    Primitive::Return(%3)    #(Tensor(F32)[128, 1, 39, 300]) #scope: Default/network-WithLossCell/_backbone-DPCNN/batch_normer-BatchNorm2d
+      # In file C:\Compiler\virtualEnvs\MindSpore120\lib\site-packages\mindspore\ops\composite\multitype_ops\getitem_impl.py(86)/    return F.tuple_getitem(data, number_index)/
+}
+
+
+# num of total function graphs: 31
